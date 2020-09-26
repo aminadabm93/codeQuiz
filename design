@@ -1,0 +1,30 @@
+array of questions w/ answer choices (buttons)
+
+-timer that goes down if answer is wrong 
+- score = time 
+
+- questions = array
+- answer choices = array (1 array/question)
+- correct answer = 
+
+Step1: create questions and buttons for answers
+questions[q1,q2,q3...qn]
+choicesQ1[a,b,c,d]
+choicesQ2[a,b,c,d]
+.
+.
+.
+choicesQn[a,b,c,d]
+
+Step 2: determine if they are correct (array)
+answers[a,c,a,...b] 
+- index of array = question number and value is answer
+- display if wrong or correct underneath answer choices 
+
+Step 3: Timer starts at 75 seconds
+- if question is wrong, then deduct 20 seconds
+
+Step 4: Score 
+- allow to save initials and score 
+- allow to clear scores 
+(advanced feature - must input password to clear scores)
