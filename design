@@ -28,3 +28,10 @@ Step 4: Score
 - allow to save initials and score 
 - allow to clear scores 
 (advanced feature - must input password to clear scores)
+
+
+##html design
+
+create a question div 
+create an choices div w/ buttons
+create a timer div? hmm idk
