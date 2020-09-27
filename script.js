@@ -14,14 +14,10 @@ var startButton = document.querySelector("#startButton");
 function startGame(){
     //we must erase the start-screen div
     //call the startQuestions function
-    var insideStuff = document.querySelector("#start-screen");
-    insideStuff.innerHTML="";
-    console.log("Hi this should have cleared");
+    document.querySelector("#start-screen").innerHTML="";
 }
 
 function startQuestions(){
     //we must read question from array 
 }
-startButton.addEventListener("click", function(){
-    startGame();
-});
+startButton.addEventListener("click", startGame);
