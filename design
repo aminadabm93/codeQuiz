@@ -35,3 +35,11 @@ Step 4: Score
 create a question div 
 create an choices div w/ buttons
 create a timer div? hmm idk
+
+
+###user actions
+
+1) click start game
+2) select answer choices ->proceeds to next question auto
+3) enter initials. 
+4) clear high score or play again
