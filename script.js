@@ -21,8 +21,7 @@ var answerChoices = [["Strings","Booleans","Alerts","Numbers"],["Quotes","Curly 
     function startGame(){
     //we must erase the start-screen div
     //call the startQuestions function
-    document.querySelector("#start-screen").innerHTML="";
-    startQuestions();
+    
 }
 
 function startQuestions(){
@@ -30,6 +29,13 @@ function startQuestions(){
     //add list & buttons w/ choices
     //add listeners & see if they chose correct answer 
     //print question
+    if(questionIndex==0){
+        document.querySelector("#start-screen").innerHTML="";
+        
+    }
+    else if(questionIndex>0){
+        document.querySelector("#choices").innerHTML="";
+    }
     
     var questionTitle = document.querySelector("#question-title");
     questionTitle.textContent=questions[questionIndex];
@@ -45,6 +51,7 @@ function startQuestions(){
         button.setAttribute("data-index",j);
         list.appendChild(button);
         list.appendChild(document.createElement("br"));
+        console.log("the button text is "+button.textContent);
     }
 
     if(questionIndex==questions.length){
@@ -59,16 +66,13 @@ function startQuestions(){
 //this will evaluate answer right or wrong
 function nextQuestion(answerIndex){
     //update timer if wrong
-
+    console.log("User selected the button index #"+answerIndex);
     //move onto next question
-    document.querySelector("#choices").innerHTML="";
-    
     startQuestions();
-    console.log("the start questiosn method runs again.")
 }
 
 
-startButton.addEventListener("click", startGame);
+startButton.addEventListener("click", startQuestions);
 //this function will listen for the answer choice
 
 questionsDiv.addEventListener("click",function(event){
@@ -76,8 +80,7 @@ questionsDiv.addEventListener("click",function(event){
         var button = event.target;
         nextQuestion(button.getAttribute("data-index"));
         //clear buttons
-        document.querySelector("#choices").innerHTML="";
+        console.log("The tag has children: " +document.querySelector("#choices").hasChildNodes());
     }
-    
 });
 
