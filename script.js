@@ -10,9 +10,15 @@
 //array for correct answer choices 
 var questionIndex =0;
 var finalScore=0;
+var highscores =[];
 var secondsLeft = 75;
 var startButton = document.querySelector("#startButton");
+var startDiv = document.querySelector("#start-screen");
 var questionsDiv = document.querySelector("#questions");
+var highscoreDiv = document.querySelector("#highscores");
+var highScoresList = document.querySelector("#highscores-list");
+var endDiv = document.querySelector("#end-screen");
+
 var questions = ["Commonly used data types DO NOT include:","The condition in an if/else statement is enclosed within ___.",
     "Arrays in JavaScript can be used to store ___.", "String values must be enclosed within ___ when being assigned to variables",
     "A very useful tool used during development and debugging for printing content to the debugger is:"];
@@ -22,11 +28,13 @@ var answerChoices = [["Strings","Booleans","Alerts","Numbers"],["Quotes","Curly 
 
 var key = [2,2,3,2,3];
 
+
 function startQuestions(){
     //clears start screen
     if(questionIndex==0){
-        document.querySelector("#start-screen").innerHTML="";
-        
+        startDiv.setAttribute("class","hide");
+        console.log("The question index is "+questionIndex);
+        questionsDiv.removeAttribute("class");
     }
     //clears previous answer choices
     else if(questionIndex>0){
@@ -34,12 +42,7 @@ function startQuestions(){
     }
     //if at the last question
     if(questionIndex==questions.length){
-        //end game
-        finalScore=secondsLeft;
-
-        document.querySelector("#end-screen").style.visibility="visible";
-        document.querySelector("#final-score").textContent=finalScore;
-        document.querySelector("#questions").innerHTML="";
+        endScreen();
         return null;
     }
     //create question 
@@ -79,12 +82,43 @@ function startTime(){
         secondsLeft--;
     },1000);
 }
+
+function endScreen(){
+    //end game, clear questions and load end screen
+    finalScore=secondsLeft;
+    endDiv.removeAttribute("class");
+    //endDiv.style.visibility="visible";
+    document.querySelector("#final-score").textContent=finalScore;
+    questionsDiv.setAttribute("class","hide");
+    document.querySelector("#submit").addEventListener("click",function(){
+        var initials = document.querySelector("#initials").value;
+        highscores.push(initials+" - "+finalScore);
+        questionsDiv.style.visibility="hide";
+        highScoreTable();
+    });
+    //update scores array
+    //go to high scores screen 
+
+}
+
+function highScoreTable(){
+    endDiv.setAttribute("class","hide");
+    highscoreDiv.removeAttribute("class");
+    //endDiv.setAttribute("class","hide");
+    //endDiv.style.visibility="hidden";
+    for(var i=0;i<highscores.length;i++){
+        var entry = document.createElement("li");
+        entry.textContent= highscores[i];
+        highScoresList.appendChild(entry);
+    }  
+}
+
+
+
 //start the quiz
 startButton.addEventListener("click", startQuestions);
 startTime();
-
 questionsDiv.appendChild(document.createElement("hr"));
-document.querySelector("#end-screen").style.visibility="hidden";
 
 //this function will listen for the answer choice
 questionsDiv.addEventListener("click",function(event){
@@ -94,3 +128,11 @@ questionsDiv.addEventListener("click",function(event){
     }
 });
 
+
+$("#restart").on("click",function(){
+    
+});
+
+$("#goToHS").on("click",function(){
+
+});
