@@ -32,8 +32,8 @@ var key = [2,2,3,2,3];
 function startQuestions(){
     //clears start screen
     if(questionIndex==0){
+        secondsLeft=75;
         startDiv.setAttribute("class","hide");
-        console.log("The question index is "+questionIndex);
         questionsDiv.removeAttribute("class");
     }
     //clears previous answer choices
@@ -130,7 +130,9 @@ questionsDiv.addEventListener("click",function(event){
 
 
 $("#restart").on("click",function(){
-    
+    startDiv.removeAttribute("class");
+    highscoreDiv.setAttribute("class","hide");
+    questionIndex=0;
 });
 
 $("#goToHS").on("click",function(){
