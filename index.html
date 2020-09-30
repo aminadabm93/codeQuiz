@@ -11,19 +11,19 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    <header>View High Scores <span id="timer" class="time"></span></header>
+    <header id="goToHS">View High Scores <span id="timer" class="time"></span></header>
     
     <div id="start-screen" class="start">
         <h1>Coding Quiz Challenge</h1>
         <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
         <button id="startButton">Start Quiz</button>
     </div>
+
     <div id="questions" class="hide">
         <h2 id="question-title"></h2>
         <div id="choices" class="choices"></div>
     </div>
     
-
     <div id="end-screen" class="hide">
         <h2>All Done!</h2>
         <p>Your final score is: <span id="final-score"></span></p>

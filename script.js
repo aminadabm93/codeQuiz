@@ -43,6 +43,7 @@ function startQuestions(){
     //if at the last question
     if(questionIndex==questions.length){
         endScreen();
+        questionIndex=0;
         return null;
     }
     //create question 
@@ -61,16 +62,46 @@ function startQuestions(){
     }
 }
 
+
+function endScreen(){
+    //end game, clear questions and load end screen
+    finalScore=secondsLeft;
+    endDiv.removeAttribute("class");
+    document.querySelector("#final-score").textContent=finalScore;
+    questionsDiv.setAttribute("class","hide");
+    document.querySelector("#submit").addEventListener("click",function(){
+        highScoreTable();
+        console.log("This is running");
+    });
+
+}
+
+function highScoreTable(){
+    var initials = document.querySelector("#initials").value;
+    highscores.push(initials+" = "+finalScore);
+    endDiv.setAttribute("class","hide");
+    highscoreDiv.removeAttribute("class");
+    for(var i=0;i<highscores.length;i++){
+        var entry = document.createElement("li");
+        entry.textContent= highscores[i];
+        highScoresList.appendChild(entry);
+    }  
+}
+
 //this will evaluate answer right or wrong
 function nextQuestion(answerIndex){
     //update timer if wrong
     if(answerIndex!=key[questionIndex]){
         secondsLeft-=10;
-        
+        var wrong = document.createElement("h3");
+        wrong.textContent="wrong";
+        document.querySelector("#choices").appendChild(wrong);
     }
-    //insert horizontal line and whether they got the question right or wrong
-    //questionsDiv.appendChild(document.createElement)
-    //move onto next question
+    else{
+        var right = document.createElement("h3");
+        right.textContent="correct!";
+        document.querySelector("#choices").appendChild(right);
+    }
     questionIndex++;
     startQuestions();
 }
@@ -81,36 +112,6 @@ function startTime(){
         timer.textContent="Time: "+secondsLeft;
         secondsLeft--;
     },1000);
-}
-
-function endScreen(){
-    //end game, clear questions and load end screen
-    finalScore=secondsLeft;
-    endDiv.removeAttribute("class");
-    //endDiv.style.visibility="visible";
-    document.querySelector("#final-score").textContent=finalScore;
-    questionsDiv.setAttribute("class","hide");
-    document.querySelector("#submit").addEventListener("click",function(){
-        var initials = document.querySelector("#initials").value;
-        highscores.push(initials+" - "+finalScore);
-        questionsDiv.style.visibility="hide";
-        highScoreTable();
-    });
-    //update scores array
-    //go to high scores screen 
-
-}
-
-function highScoreTable(){
-    endDiv.setAttribute("class","hide");
-    highscoreDiv.removeAttribute("class");
-    //endDiv.setAttribute("class","hide");
-    //endDiv.style.visibility="hidden";
-    for(var i=0;i<highscores.length;i++){
-        var entry = document.createElement("li");
-        entry.textContent= highscores[i];
-        highScoresList.appendChild(entry);
-    }  
 }
 
 
@@ -128,13 +129,14 @@ questionsDiv.addEventListener("click",function(event){
     }
 });
 
-
 $("#restart").on("click",function(){
     startDiv.removeAttribute("class");
     highscoreDiv.setAttribute("class","hide");
     questionIndex=0;
+    highScoresList.innerHTML="";
 });
 
 $("#goToHS").on("click",function(){
-
+    startDiv.setAttribute("class","hide");
+    highScoreTable();
 });
